@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 const FoodCard = () => {
-    return <div class="mx-auto d-flex pt-3 pb-3" style={{ width: "60%", borderBottom: "1px solid gray" }}>
+    return <div class="mx-auto d-flex pt-3 pb-3" style={{ width: "100%", borderBottom: "1px solid gray" }}>
         <div class="ms-3 mt-3" style={{ width: "100%" }}>
             <div class="food-info">
                 <h4>Veg. Pizza Extra Toppings</h4>

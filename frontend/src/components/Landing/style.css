@@ -6,3 +6,8 @@
     background-size: cover;
     /* background-color: rgb(241, 241, 241); */
 }
+
+/* MENU */
+.menu-list{
+    list-style-type: none;
+}

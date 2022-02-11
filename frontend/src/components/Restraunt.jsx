@@ -11,7 +11,7 @@ const Restraunt = () => {
               <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/10/domino-s-pizza-1571307449.jpg" style={{ height: "175px", width: "280px" }} />
             </div>
             <div className="col">
-              <div className="ps-3" style={{width:"400px"}}>
+              <div className="ps-3" style={{ width: "400px" }}>
                 <h3>Restraunt Name</h3>
                 <p style={{ marginTop: "-10px" }}>Address</p>
                 <p style={{ marginTop: "-5px", fontWeight: "500" }}>South Indian</p>
@@ -42,10 +42,12 @@ const Restraunt = () => {
       </div>
     </div>
     <div className="row pt-3">
-    <FoodCard/>
-    <FoodCard/>
-    <FoodCard/>
+      <div class="mx-auto" style={{ width: "60%" }}>
+        <FoodCard />
+        <FoodCard />
+        <FoodCard />
       </div>
+    </div>
   </div>;
 };
 
