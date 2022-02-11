@@ -1,0 +1,17 @@
+.food-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* RESTRAUNTS PAGE */
+.restraunts-container{
+    width: 80%;
+}
+
+@media(max-width:1150px){
+    .restraunts-container{
+        width: 100%;
+    }
+    
+}
