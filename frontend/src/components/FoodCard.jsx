@@ -1,24 +1,31 @@
 import React from 'react';
 import './style.css';
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 const FoodCard = ({data}) => {
     const user=JSON.parse(localStorage.getItem("user"));
+    const history=useHistory();
     const handleAdd =async()=>{
-        const id=user._id;
-        const item={
-            user:id,
-            item:data._id,
-            restraunt:data.restraunt,
-            quantity:1,
-            increase:true
+        if(user){
+            const id=user._id;
+            const item={
+                user:id,
+                item:data._id,
+                restraunt:data.restraunt,
+                quantity:1,
+                increase:true
+            }
+            const check=await axios.get(`http://localhost:5000/server/cart/${id}/${data._id}`);
+            if(check.data){
+                item.quantity=check.data+1;
+                const res=await axios.put(`http://localhost:5000/server/cart/${id}`,item)
+            }else{  
+                const res=await axios.post(`http://localhost:5000/server/cart/${id}`,item);
+            }
         }
-        const check=await axios.get(`http://localhost:5000/server/cart/${id}/${data._id}`);
-        if(check.data){
-            item.quantity=check.data+1;
-            const res=await axios.put(`http://localhost:5000/server/cart/${id}`,item)
-        }else{  
-            const res=await axios.post(`http://localhost:5000/server/cart/${id}`,item);
+        else{
+            history.push("/login")
         }
     }
     return <div class="mx-auto d-flex pt-3 pb-3" style={{ width: "100%", borderBottom: "1px solid gray" }}>

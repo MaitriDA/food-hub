@@ -30,11 +30,43 @@ router.put("/:id", async (req, res) => {
         res.status(500).json({ message: "Error" })
     }
 })
+//Get Cart total
+router.get("/:id/total",async(req,res)=>{
+    try{
+        var total=0;
+        var discount=0;
+        var delivery=0;
+        const cart=await Cart.find({"user":req.params.id});
+        var l=cart.length;
+        var resArray=[];
+        for(i=0;i<l;i++){
+            const item=await Item.findById(cart[i].item);
+            var price=cart[i].quantity*item.price;
+            total=total+price;
+            const restraunt =await Restraunt.findById(cart[i].restraunt);
+            var discount=discount+price*0.01*(restraunt.offer);
+            if(!resArray.includes(cart[i].restraunt.toString())){
+                delivery=delivery+restraunt.delivery;
+                resArray.push(cart[i].restraunt.toString());
+            }
+        }
+        const cartTotal={
+            total:total,
+            discount:parseInt(discount),
+            delivery:delivery
+        }
+        res.status(200).json(cartTotal);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Error"})
+    }
+})
+
 
 //Get Cart Item
-router.get("/:id", async (req, res) => {
+router.get("/:id/cart", async (req, res) => {
     try{
-        const cart = await Cart.find({ "user": "620a1ead22ae4a0483f34c94" });
+        const cart = await Cart.find({ "user": req.params.id });
         var l=cart.length;
         var itemArray=[];
         for(i=0;i<l;i++){
@@ -73,4 +105,6 @@ router.get("/:user/:id",async(req,res)=>{
         res.status(200).json(false);
     }
 })
+
+
 module.exports = router;

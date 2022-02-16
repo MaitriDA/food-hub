@@ -46,9 +46,13 @@ const RestrauntSchema=new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    offers:{
-        type:Array,
-        default:[]
+    offer:{
+        type:Number,
+        default:0
+    },
+    delivery:{
+        type:Number,
+        default:0
     }
 },{timestamps:true});
 

@@ -7,11 +7,15 @@ const Restraunt = () => {
   
   const [restraunt,setRestraunt]=useState();
   const [items,setItems]=useState([]);
+  const [offer,setOffer]=useState();
+  const [delivery,setDelivery]=useState();
   const id=useParams();
 
   const getRestraunt = async () => {
     const res = await axios.get(`http://localhost:5000/server/restraunt/${id.id}`);
     setRestraunt(res.data);
+    setOffer(res.data.offer);
+    setDelivery(res.data.delivery);
   }
 
   const getRestrauntItem=async()=>{
@@ -51,11 +55,12 @@ const Restraunt = () => {
               <div style={{ width: "250px" }}>
                 <div class="mt-4 " style={{ height: "70%", borderBottom: "1px solid gray", borderTop: "1px solid gray" }}>
                   <div class="text-center " style={{ color: "gray", fontSize: "20px", fontWeight: "600" }}>Offers</div>
-                  <ul>
-                    {restraunt.offers.map(o=>(
-                      <li>{o}</li>
-                    ))}
-                  </ul>
+                  {(offer!==0 || delivery===0)?
+                    <ul>
+                      {offer!==0 && <li>{offer} % off</li>}
+                      {delivery===0 && <li>Free Delivery</li>}
+                  </ul>:<div>No Offers</div>
+                  }
                 </div>
               </div>
             </div>

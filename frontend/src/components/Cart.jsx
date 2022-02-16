@@ -6,7 +6,11 @@ import axios from "axios";
 const Cart = () => {
     const user=JSON.parse(localStorage.getItem("user"));
     const [cart,setCart]=useState([]);
-    const [quantity,setQuantity]=useState();
+    const [cartTotal,setCartTotal]=useState({
+        total:0,
+        discount:0,
+        delivery:0
+    });
 
     const handleQuantityIncrease=async(index)=>{
         const data=cart[index];
@@ -22,7 +26,9 @@ const Cart = () => {
             quantity:q+1,
             restraunt:data.restraunt
         }
-        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item)
+        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item);
+        const total=await axios.get(`http://localhost:5000/server/cart/${user._id}/total`);
+        setCartTotal(total.data);
     }
     const handleQuantityDescrease=async(index)=>{
         const data=cart[index];
@@ -38,11 +44,15 @@ const Cart = () => {
             quantity:q-1,
             restraunt:data.restraunt
         }
-        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item)
+        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item);
+        const total=await axios.get(`http://localhost:5000/server/cart/${user._id}/total`);
+        setCartTotal(total.data);
     }
     const getCart=async()=>{
-        const res=await axios.get(`http://localhost:5000/server/cart/${user._id}`);
+        const res=await axios.get(`http://localhost:5000/server/cart/${user._id}/cart`);
         setCart(res.data);
+        const total=await axios.get(`http://localhost:5000/server/cart/${user._id}/total`);
+        setCartTotal(total.data);
     }
     useEffect(()=>{
         getCart();
@@ -77,24 +87,24 @@ const Cart = () => {
                     <h4 class="mx-auto mt-3" style={{width:"fit-content",color:"#d35100"}}>CART TOTAL</h4>
                     <div class="d-flex mt-3" style={{fontSize:"18px"}}>
                         <p >Sub - Total:</p>
-                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs 600/-</span>
+                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs {cartTotal.total}/-</span>
                     </div>
                     <div class="d-flex" style={{fontSize:"18px",marginTop:"-20px"}}>
                         <p >Discount:</p>
-                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs 50/-</span>
+                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs {cartTotal.discount}/-</span>
                     </div>
                     <div class="d-flex" style={{fontSize:"18px",marginTop:"-20px"}}>
                         <p >Delivery:</p>
-                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs 35/-</span>
+                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs {cartTotal.delivery}/-</span>
                     </div>
                     <div class="d-flex" style={{fontSize:"18px",marginTop:"-20px"}}>
                         <p >Tax:</p>
-                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs 35/-</span>
+                        <span class="ms-auto" style={{fontWeight:"600"}}>Rs {parseInt(cartTotal.total*0.05)}/-</span>
                     </div>
                     <hr style={{marginTop:"-5px"}}/>
                     <div class="d-flex" style={{fontSize:"20px",fontWeight:"600",color:"#d35100"}}>
                         <p >Total:</p>
-                        <span class="ms-auto">Rs 35/-</span>
+                        <span class="ms-auto">Rs {cartTotal.total-cartTotal.discount+cartTotal.delivery+parseInt(cartTotal.total*0.05)}/-</span>
                     </div>
                     <button className="btn btn-primary mt-3" style={{width:"100%",backgroundColor:"black",border:"none"}}>Pay Online</button>
                     <button className="btn btn-primary mt-3 mb-5" style={{width:"100%",backgroundColor:"black",border:"none"}}>Cash On Delivery</button>
