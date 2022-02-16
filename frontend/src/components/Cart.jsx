@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import FoodCard from './FoodCard';
+import Navbar from '../components/Navbar';
 import './style.css';
 import axios from "axios";
 
@@ -45,6 +45,10 @@ const Cart = () => {
             restraunt:data.restraunt
         }
         const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item);
+        if((q-1)===0){
+            const res=await axios.get(`http://localhost:5000/server/cart/${user._id}/cart`);
+            setCart(res.data);
+        }
         const total=await axios.get(`http://localhost:5000/server/cart/${user._id}/total`);
         setCartTotal(total.data);
     }
@@ -59,7 +63,9 @@ const Cart = () => {
     },[])
     
     return (
-        <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
+        <div>
+            <Navbar/>
+            <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
             <div className="d-flex">
                 <div style={{width:"65%"}}>
                     {cart.map((i,index)=>(<div class="mx-auto d-flex pt-3" style={{ width: "80%", borderBottom: "1px solid gray" }}>
@@ -111,6 +117,8 @@ const Cart = () => {
                 </div>
             </div>
         </div>
+        </div>
+        
     )
 }
 

@@ -15,10 +15,10 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/"><Navbar/><Landing/></Route>
-          <Route exact path="/res/:id"><Navbar/><Restraunt/></Route>
-          <Route exact path="/res"><Navbar/><Restraunts/></Route>
-          <Route exact path="/menu"><Navbar/><Menu/></Route>
-          <Route exact path="/cart"><Navbar/><Cart/></Route>
+          <Route exact path="/res/:id"><Restraunt/></Route>
+          <Route exact path="/res"><Restraunts/></Route>
+          <Route exact path="/menu"><Menu/></Route>
+          <Route exact path="/cart"><Cart/></Route>
           <Route exact path="/login"><UserLogin/></Route>
           <Route exact path="/register"><UserRegister/></Route>
         </Switch>

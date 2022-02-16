@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Restraunts = () => {
   const space="   ";
@@ -15,7 +16,9 @@ const Restraunts = () => {
     getRestraunt();
   }, [])
   return (
-    <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
+    <div>
+      <Navbar/>
+<div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
       <div className="row mx-auto restraunts-container">
         {restraunts.map(r => (
           <div className="col-sm-6 col-md-3 col-12 px-3 py-2" >
@@ -39,6 +42,8 @@ const Restraunts = () => {
         ))}
       </div>
     </div>
+    </div>
+    
   )
 }
 

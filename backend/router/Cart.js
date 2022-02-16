@@ -21,15 +21,23 @@ router.post("/:id", async (req, res) => {
 //Increase Descrese Quantity
 router.put("/:id", async (req, res) => {
     try {
-        cartItem = await Cart.findOneAndUpdate({ "user": req.params.id, "item": req.body.item }, {
-            $set: { quantity: req.body.quantity}
-        });
-        res.status(200).json({ message: "Quantity Changed" })
+        if(req.body.quantity===0){
+            const cartItem=await Cart.findOneAndDelete({ "user": req.params.id, "item": req.body.item });
+            res.status(200).json({message:"Item removed from cart"});
+        }
+        else{
+            const cartItem = await Cart.findOneAndUpdate({ "user": req.params.id, "item": req.body.item }, {
+                $set: { quantity: req.body.quantity}
+            });
+            res.status(200).json({ message: "Quantity Changed" })
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Error" })
     }
 })
+
+
 //Get Cart total
 router.get("/:id/total",async(req,res)=>{
     try{
