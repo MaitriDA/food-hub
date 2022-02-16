@@ -1,53 +1,77 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import FoodCard from './FoodCard';
 import './style.css';
+import axios from "axios";
 
 const Cart = () => {
+    const user=JSON.parse(localStorage.getItem("user"));
+    const [cart,setCart]=useState([]);
+    const [quantity,setQuantity]=useState();
+
+    const handleQuantityIncrease=async(index)=>{
+        const data=cart[index];
+        let q=data.quantity;
+        console.log(data);
+        let newData=[...cart];
+        data.quantity=q+1;
+        newData[index]=data;
+        setCart(newData);
+        const item={
+            user:user._id,
+            item:data.id,
+            quantity:q+1,
+            restraunt:data.restraunt
+        }
+        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item)
+    }
+    const handleQuantityDescrease=async(index)=>{
+        const data=cart[index];
+        let q=data.quantity;
+        console.log(data);
+        let newData=[...cart];
+        data.quantity=q-1;
+        newData[index]=data;
+        setCart(newData);
+        const item={
+            user:user._id,
+            item:data.id,
+            quantity:q-1,
+            restraunt:data.restraunt
+        }
+        const res=await axios.put(`http://localhost:5000/server/cart/${user._id}`,item)
+    }
+    const getCart=async()=>{
+        const res=await axios.get(`http://localhost:5000/server/cart/${user._id}`);
+        setCart(res.data);
+    }
+    useEffect(()=>{
+        getCart();
+    },[])
+    
     return (
         <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
             <div className="d-flex">
                 <div style={{width:"65%"}}>
-                    <div class="mx-auto d-flex pt-3" style={{ width: "80%", borderBottom: "1px solid gray" }}>
+                    {cart.map((i,index)=>(<div class="mx-auto d-flex pt-3" style={{ width: "80%", borderBottom: "1px solid gray" }}>
                         <div class="ms-5 mt-3" style={{ width: "100%" }}>
                             <div class="food-info">
-                                <h5>Veg. Pizza Extra Toppings</h5>
-                                <span class="me-4" style={{ color: "green", fontWeight: "600" }}>Pure Veg</span>
+                                <h5>{i.name}</h5>
+                                {i.veg ? <span class="me-4" style={{ color: "green", fontWeight: "600" }}>Veg</span>:<span class="me-4" style={{ color: "red", fontWeight: "600" }}>Non Veg</span>}
                             </div>
-                            <div>300 x 2</div>
+                            <div>{i.price} x {i.quantity}</div>
                             <div class="food-info me-4">
-                                <p style={{ marginTop: "-7px", fontSize: "18px", fontWeight: "600" }}>Rs 600/-</p>
+                                <p style={{ marginTop: "-7px", fontSize: "18px", fontWeight: "600" }}>Rs {i.price*i.quantity}/-</p>
                                 <div class="d-flex quantity" style={{ color: "#d35100", marginTop: "-20px", fontWeight: "600" }}>
-                                    <div style={{ fontSize: "25px", marginRight: "20px" }}>-</div>
-                                    <div style={{ fontSize: "20px" }}>2</div>
-                                    <div style={{ fontSize: "25px", marginLeft: "20px" }}>+</div>
+                                    <div style={{ fontSize: "25px", marginRight: "20px" }} onClick={()=>handleQuantityDescrease(index)}>-</div>
+                                    <div style={{ fontSize: "20px" }}>{i.quantity}</div>
+                                    <div style={{ fontSize: "25px", marginLeft: "20px" }} onClick={()=>handleQuantityIncrease(index)}>+</div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <img class="ms-auto me-3 " src="https://imageio.forbes.com/specials-images/imageserve/5f98cbc2af157b759b3a6272/Panera-pizza/960x0.jpg?fit=bounds&format=jpg&width=960" style={{ width: "150px", height: "90px", borderRadius: "10px" }} />
+                            <img class="ms-auto me-3 " src={i.image} style={{ width: "150px", height: "90px", borderRadius: "10px" }} />
                         </div>
-                    </div>
-
-                    <div class="mx-auto d-flex pt-3" style={{ width: "80%", borderBottom: "1px solid gray" }}>
-                        <div class="ms-5 mt-3" style={{ width: "100%" }}>
-                            <div class="food-info">
-                                <h5>Veg. Pizza Extra Toppings</h5>
-                                <span class="me-4" style={{ color: "green", fontWeight: "600" }}>Pure Veg</span>
-                            </div>
-                            <div>300 x 2</div>
-                            <div class="food-info me-4">
-                                <p style={{ marginTop: "-7px", fontSize: "18px", fontWeight: "600" }}>Rs 600/-</p>
-                                <div class="d-flex quantity" style={{ color: "#d35100", marginTop: "-20px", fontWeight: "600" }}>
-                                    <div style={{ fontSize: "25px", marginRight: "20px" }}>-</div>
-                                    <div style={{ fontSize: "20px" }}>2</div>
-                                    <div style={{ fontSize: "25px", marginLeft: "20px" }}>+</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <img class="ms-auto me-3 " src="https://imageio.forbes.com/specials-images/imageserve/5f98cbc2af157b759b3a6272/Panera-pizza/960x0.jpg?fit=bounds&format=jpg&width=960" style={{ width: "150px", height: "90px", borderRadius: "10px" }} />
-                        </div>
-                    </div>
+                    </div>))}
                 </div>
                 <div class="ps-5 pe-5"style={{ width:"30%",backgroundColor: "rgb(241,241,241)" ,height:"fit-content" }}>
                     <h4 class="mx-auto mt-3" style={{width:"fit-content",color:"#d35100"}}>CART TOTAL</h4>

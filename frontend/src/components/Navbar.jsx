@@ -3,6 +3,12 @@ import cart from '../img/cart.png';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+    const user=localStorage.getItem("user");
+
+    const handleLogout=()=>{
+        localStorage.removeItem("user");
+        window.location.reload(false);
+    }
     return <div>
         <nav class="navbar navbar-expand-lg" style={{ backgroundColor: "#d35100", position: "fixed", width: "100%", zIndex: "1" }}>
             <div class="container-fluid">
@@ -29,7 +35,16 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <form class="d-flex me-4">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        { user ?<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <div class="nav-link" style={{ color: "white" }} onClick={handleLogout}>Logout</div>
+                            </li>
+                            <li class="nav-item">
+                                <Link to="/cart" className="link">
+                                    <div class="nav-link" style={{ color: "white" }}><img src={cart} style={{ height: "25px" }} /></div>
+                                </Link>
+                            </li>
+                        </ul>:<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <Link to="/login" className="link">
                                     <div class="nav-link" aria-current="page" style={{ color: "white" }}>Login</div>
@@ -40,12 +55,7 @@ const Navbar = () => {
                                     <div class="nav-link" style={{ color: "white" }}>Admin</div>
                                 </Link>
                             </li>
-                            <li class="nav-item">
-                                <Link to="/cart" className="link">
-                                    <div class="nav-link" style={{ color: "white" }}><img src={cart} style={{ height: "25px" }} /></div>
-                                </Link>
-                            </li>
-                        </ul>
+                        </ul>}
                     </form>
                 </div>
             </div>

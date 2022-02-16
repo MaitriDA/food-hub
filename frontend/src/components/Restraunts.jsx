@@ -1,73 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
+import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Restraunts = () => {
+  const space="   ";
+  const [restraunts, setRestraunts] = useState([]);
+
+  const getRestraunt = async () => {
+    const res = await axios.get("http://localhost:5000/server/restraunt/");
+    setRestraunts(res.data);
+  }
+  useEffect(() => {
+    getRestraunt();
+  }, [])
   return (
-    <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px"}}>
+    <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
       <div className="row mx-auto restraunts-container">
-        <div className="col-sm-6 col-md-3 col-12 px-4 py-2" style={{height:"250px"}}>
-          <div>
-          <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/10/domino-s-pizza-1571307449.jpg" style={{ height: "160px", width: "100%",borderRadius:"10px" }} />
-            <h5 class="mt-1">Domino's India</h5>
-            <p style={{marginTop:"-10px",fontSize:"15px"}}>Pizza</p>
-            <div class="d-flex" style={{ fontWeight: "600",marginTop:"-20px" }}>
-                  <div >
-                    <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                    <span class="ms-2">3.9</span>
-                  </div>
-                  <div >
-                    <span class="ms-5" style={{ color: "green" }}>Pure Veg</span>
-                  </div>
+        {restraunts.map(r => (
+          <div className="col-sm-6 col-md-3 col-12 px-3 py-2" >
+            <Link to={`/res/${r._id}`} class="link">
+            <div style={{ height: "250px"}}>
+              <img src={r.image} style={{ height: "160px", width: "100%", borderRadius: "5px" }} />
+              <h5 class="mt-1" style={{color:"black"}}>{r.name}</h5>
+              {r.description?<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}> {`${r.description.substring(0, 30)}...`}</p>:<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}>Yummy Food</p>}
+              <div class="d-flex justify-content-between" style={{ fontWeight: "600", marginTop: "-20px" }}>
+                <div style={{color:"black"}}>
+                  <i class="fa fa-star" style={{ alignItems: "center" }}></i>
+                  <span class="ms-2">{r.rating}</span>
                 </div>
-          </div>
-        </div>
-        <div className="col-sm-6 col-md-3 col-12 px-4 py-2" style={{height:"250px"}}>
-          <div>
-          <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/10/domino-s-pizza-1571307449.jpg" style={{ height: "160px", width: "100%",borderRadius:"10px" }} />
-            <h5 class="mt-1">Domino's India</h5>
-            <p style={{marginTop:"-10px",fontSize:"15px"}}>Pizza</p>
-            <div class="d-flex" style={{ fontWeight: "600",marginTop:"-20px" }}>
-                  <div >
-                    <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                    <span class="ms-2">3.9</span>
-                  </div>
-                  <div >
-                    <span class="ms-5" style={{ color: "green" }}>Pure Veg</span>
-                  </div>
+                <div >
+                  {r.veg && <span style={{ color: "green" }}>Pure Veg</span>}
                 </div>
+              </div>
+            </div>
+            </Link>
           </div>
-        </div><div className="col-sm-6 col-md-3 col-12 px-4 py-2" style={{height:"250px"}}>
-          <div>
-          <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/10/domino-s-pizza-1571307449.jpg" style={{ height: "160px", width: "100%",borderRadius:"10px" }} />
-            <h5 class="mt-1">Domino's India</h5>
-            <p style={{marginTop:"-10px",fontSize:"15px"}}>Pizza</p>
-            <div class="d-flex" style={{ fontWeight: "600",marginTop:"-20px" }}>
-                  <div >
-                    <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                    <span class="ms-2">3.9</span>
-                  </div>
-                  <div >
-                    <span class="ms-5" style={{ color: "green" }}>Pure Veg</span>
-                  </div>
-                </div>
-          </div>
-        </div><div className="col-sm-6 col-md-3 col-12 px-4 py-2" style={{height:"250px"}}>
-          <div>
-          <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2019/10/domino-s-pizza-1571307449.jpg" style={{ height: "160px", width: "100%",borderRadius:"10px" }} />
-            <h5 class="mt-1">Domino's India</h5>
-            <p style={{marginTop:"-10px",fontSize:"15px"}}>Pizza</p>
-            <div class="d-flex" style={{ fontWeight: "600",marginTop:"-20px" }}>
-                  <div >
-                    <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                    <span class="ms-2">3.9</span>
-                  </div>
-                  <div >
-                    <span class="ms-5" style={{ color: "green" }}>Pure Veg</span>
-                  </div>
-                </div>
-          </div>
-        </div>
-        
+        ))}
       </div>
     </div>
   )

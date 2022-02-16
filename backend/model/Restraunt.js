@@ -1,0 +1,55 @@
+const mongoose=require("mongoose");
+
+const RestrauntSchema=new mongoose.Schema({
+    name:{
+        type:String,
+        require:true,
+    },
+    address:{
+        type:String,
+        default:"",
+    },
+    email:{
+        type:String,
+        require:true,
+        unique:true
+    },
+    contact:{
+        type:Number,
+        require:true,
+        unique:true,
+    },
+    password:{
+        type:String,
+        require:true
+    },
+    description:{
+        type:String,
+    },
+    orders:{
+        type:Array,
+        default:[]
+    },
+    items:{
+        type:Array,
+        default:{
+            type:mongoose.Schema.Types.ObjectId
+        }
+    },
+    rating:{
+        type:Number
+    },
+    image:{
+        type:String
+    },
+    veg:{
+        type:Boolean,
+        default:false
+    },
+    offers:{
+        type:Array,
+        default:[]
+    }
+},{timestamps:true});
+
+module.exports=mongoose.model("Restraunt",RestrauntSchema);

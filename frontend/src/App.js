@@ -13,7 +13,6 @@ function App() {
   return (
     <div>
       <Router>
-        
         <Switch>
           <Route exact path="/"><Navbar/><Landing/></Route>
           <Route exact path="/res/:id"><Navbar/><Restraunt/></Route>
