@@ -37,7 +37,7 @@ const UserLogin = () => {
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div class="card shadow-2-strong" style={{ borderRadius: "10px" }}>
                             <div class="card-body p-5 text-center">
-                                <h3 class="mb-5">LOGIN</h3>
+                                <h3 class="mb-5">USER LOGIN</h3>
                                 <div class="form-outline mb-4">
                                     <input type="email" id="typeEmailX-2" class="form-control form-control-lg" placeholder='Email' onChange={(e)=>setEmail(e.target.value)}/>
                                 </div>

@@ -8,19 +8,29 @@ import Restraunts from "./components/Restraunts";
 import Cart from "./components/Cart";
 import UserLogin from "./components/Auth/UserLogin";
 import UserRegister from "./components/Auth/UserRegister";
+import AdminLogin from "./components/Auth/AdminLogin";
+import AdminRegister from "./components/Auth/AdminRegister";
+import Admin from "./components/Admin/Admin";
+import EditItem from "./components/Admin/EditItem";
 
 function App() {
   return (
     <div>
       <Router>
         <Switch>
-          <Route exact path="/"><Navbar/><Landing/></Route>
+          <Route exact path="/"><Landing/></Route>
           <Route exact path="/res/:id"><Restraunt/></Route>
           <Route exact path="/res"><Restraunts/></Route>
           <Route exact path="/menu"><Menu/></Route>
           <Route exact path="/cart"><Cart/></Route>
+
           <Route exact path="/login"><UserLogin/></Route>
           <Route exact path="/register"><UserRegister/></Route>
+
+          <Route exact path="/admin"><Admin/></Route>
+          <Route exact path="/admin/login"><AdminLogin/></Route>
+          <Route exact path="/admin/register"><AdminRegister/></Route>
+          <Route exact path="/admin/edititem"><EditItem/></Route>
         </Switch>
       </Router>
     </div>

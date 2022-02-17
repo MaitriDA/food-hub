@@ -21,7 +21,6 @@ router.post("/register",async(req,res)=>{
             password:hPassword
         });
         const restraunt=await newRestraunt.save();
-        console.log("Success")
         res.status(200).json({message:"Registration Successful",restraunt})
         return;
     }catch(err){
@@ -53,7 +52,7 @@ router.post("/login",async(req,res)=>{
 
 //Add Details
 router.put("/:id",async(req,res)=>{
-    if(req.body.id===req.params.id){
+    if(req.body._id===req.params.id){
         try{const restrauntFind=await Restraunt.findById(req.params.id);
             if(restrauntFind){
                 const restraunt=await Restraunt.findByIdAndUpdate(req.params.id,{

@@ -38,7 +38,7 @@ const UserRegister = () => {
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div class="card shadow-2-strong" style={{ borderRadius: "10px" }}>
                             <div class="card-body p-5 text-center">
-                                <h3 class="mb-5">REGISTER</h3>
+                                <h3 class="mb-5">USER REGISTER</h3>
                                 <div class="form-outline mb-4">
                                     <input type="text" class="form-control form-control-lg" placeholder='Name' autoComplete='off' onChange={(e)=>setName(e.target.value)}/>
                                 </div>

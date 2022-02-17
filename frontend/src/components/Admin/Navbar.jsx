@@ -1,14 +1,13 @@
 import React from 'react';
-import cart from '../img/cart.png';
 import { Link,useHistory } from 'react-router-dom';
 
 const Navbar = () => {
     const history=useHistory();
-    const user=localStorage.getItem("user");
+    const restraunt=localStorage.getItem("restraunt");
 
     const handleLogout=()=>{
-        localStorage.removeItem("user");
-        history.push("/");
+        localStorage.removeItem("restraunt");
+        history.push("/admin/login");
         window.location.reload(false);
     }
     return <div>
@@ -26,25 +25,20 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/res" className="link">
-                                <div class="nav-link" style={{ color: "white" }}>Restraunts</div>
-                            </Link>
+                                <div class="nav-link" style={{ color: "white" }} data-toggle="modal" data-target="#exampleModalCenter">Add_Items</div>
                         </li>
                         <li class="nav-item">
                             <Link to="/menu" className="link">
-                                <div class="nav-link" style={{ color: "white" }}>Menu</div>
+                                <div class="nav-link" style={{ color: "white" }}>Orders</div>
                             </Link>
                         </li>
                     </ul>
                     <form class="d-flex me-4">
-                        { user ?<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        { restraunt ?<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
+                            <Link to="/admin/login" className="link">
                                 <div class="nav-link" style={{ color: "white" }} onClick={handleLogout}>Logout</div>
-                            </li>
-                            <li class="nav-item">
-                                <Link to="/cart" className="link">
-                                    <div class="nav-link" style={{ color: "white" }}><img src={cart} style={{ height: "25px" }} /></div>
-                                </Link>
+                            </Link>
                             </li>
                         </ul>:<ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -53,7 +47,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li class="nav-item">
-                                <Link to="/admin/login" className="link">
+                                <Link to="/admin" className="link">
                                     <div class="nav-link" style={{ color: "white" }}>Admin</div>
                                 </Link>
                             </li>
@@ -62,6 +56,27 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
+        
+
+<div class="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     </div>;
 };
 

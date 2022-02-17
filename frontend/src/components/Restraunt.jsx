@@ -88,12 +88,3 @@ const Restraunt = () => {
 };
 
 export default Restraunt;
-
-
-
-
-{/* <div class="container-fluid">
-  <div class="spinner-border mx-auto" style={{marginTop:"200px"}}role="status">
-  <span class="visually-hidden">Loading...</span>
-</div> 
-    </div> */}

@@ -4,6 +4,7 @@ const Item=require("../model/Item.js");
 const bcrypt = require("bcrypt");
 const User = require("../model/User.js");
 
+
 //Add Item
 router.post("/:id",async(req,res)=>{
     try{
@@ -18,6 +19,16 @@ router.post("/:id",async(req,res)=>{
     }catch(err){
         console.log(err);
         res.status(500).json(err);
+    }
+})
+
+//Delete Item
+router.delete("/:id",async(req,res)=>{
+    try{
+        const res=await Item.findByIdAndDelete(req.params.id);
+        res.status(200).json({message:"Item Deleted"})
+    }catch(err){
+        res.status(500).json({message:"Error"})
     }
 })
 
