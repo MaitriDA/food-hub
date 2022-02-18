@@ -2,23 +2,48 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import FoodCard from './FoodCard';
 import './style.css';
+import storage from '../../firebase/config';
 
 const Home = () => {
 
   const restraunt = JSON.parse(localStorage.getItem("restraunt"));
   const [detail, setDetail] = useState();
   const [items, setItems] = useState([]);
+  const [urlCheck,setUrlCheck]=useState(false);
 
   const handleChange = (e) => {
-    if(e.target.name==="veg"){
-      if(e.target.id==="yes"){
+    if (e.target.name == "image") {
+      setUrlCheck(true);
+      const file = e.target.files[0];
+      if (file) {
+        const filename=file.name+restraunt._id;
+        console.log(filename)
+        const uploadTask = storage.ref(`restraunt/${filename}`).put(file);
+        uploadTask.on("state_changed", snapshot => { },
+          error => { console.log(error); },
+          () => {
+            storage.ref("restraunt").child(filename).getDownloadURL().then(url => {
+              console.log(url);
+              if(url){
+                setUrlCheck(false);
+              }
+              setDetail({...detail,[e.target.name]:url});
+            });
+          });
+      }
+      else {
+        console.log("Null")
+      }
+    }
+    else if (e.target.name === "veg") {
+      if (e.target.id === "yes") {
         setDetail({ ...detail, [e.target.name]: true });
       }
-      else{
+      else {
         setDetail({ ...detail, [e.target.name]: false });
       }
     }
-    else{
+    else {
       setDetail({ ...detail, [e.target.name]: e.target.value });
     }
   }
@@ -32,12 +57,13 @@ const Home = () => {
     setItems(res.data);
   }
 
-  const handleEdit = async()=>{
-    const res=await axios.put(`http://localhost:5000/server/restraunt/${restraunt._id}`,detail);
+  const handleEdit = async () => {
+    const res = await axios.put(`http://localhost:5000/server/restraunt/${restraunt._id}`, detail);
     console.log(res);
     getRestrauntDetails();
   }
   useEffect(() => {
+    console.log(storage)
     getRestrauntDetails();
     getRestrauntItem()
   }, [])
@@ -49,7 +75,7 @@ const Home = () => {
           <div className="row">
             <div className="col-4">
               <div class="ms-5" style={{ width: "fit-content" }}>
-                <img class="mx-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-bdWlZNih9R95aZluJrQ4JCcqgfB3eHLpGr7-FfsMuEVgHc9XPc5CQdXYvvbEgw3aVh8&usqp=CAU" style={{ height: "190px", width: "300px", borderRadius: "5px" }} />
+                <img class="mx-auto" src={detail.image} style={{ height: "190px", width: "300px", borderRadius: "5px" }} />
                 <input id="html" style={{ fontWeight: "500" }} type="file" name="image" class="input-field mt-2" autoComplete="off" value={detail.descritpion} onChange={handleChange} placeholder="Click to add Description" />
               </div>
             </div>
@@ -73,7 +99,7 @@ const Home = () => {
               <div className="d-flex my-1">
                 <div style={{ fontSize: "20px", color: "gray", width: "140px" }}>Veg: </div>
                 <div>
-                  <input id="yes" style={{ fontWeight: "500" }} type="radio" name="veg" class="input-field" autoComplete="off" value={detail.veg} onChange={handleChange} placeholder="Click to add Description"/>
+                  <input id="yes" style={{ fontWeight: "500" }} type="radio" name="veg" class="input-field" autoComplete="off" value={detail.veg} onChange={handleChange} placeholder="Click to add Description" />
                   <label htmlFor="yes" class="ms-2">Yes</label>
                 </div>
                 <div>
@@ -91,7 +117,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click on fields and then press edit button" className="btn btn-primary ps-3 pe-3" style={{position:"absolute",top:"10px",right:"25px",backgroundColor:"transparent",border:"2px solid #d35100",fontWeight:"500",color:"#d35100"}} onClick={handleEdit}>EDIT</button>
+          <button data-bs-toggle="tooltip" data-bs-placement="bottom" title="Click on fields and then press edit button" className="btn btn-primary ps-3 pe-3" style={{ position: "absolute", top: "10px", right: "25px", backgroundColor: "transparent", border: "2px solid #d35100", fontWeight: "500", color: "#d35100" }} onClick={handleEdit} disabled={urlCheck}>EDIT</button>
         </div>
         <div className="row pt-3">
           <div class="mx-auto" style={{ width: "60%" }}>

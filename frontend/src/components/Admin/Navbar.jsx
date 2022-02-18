@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import AddItem from './AddItem';
 
 const Navbar = () => {
-    const history=useHistory();
-    const restraunt=localStorage.getItem("restraunt");
+    const history = useHistory();
+    const restraunt = localStorage.getItem("restraunt");
 
-    const handleLogout=()=>{
+    const handleLogout = () => {
         localStorage.removeItem("restraunt");
         history.push("/admin/login");
         window.location.reload(false);
@@ -20,12 +21,7 @@ const Navbar = () => {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <Link to="/" className="link">
-                                <div class="nav-link" aria-current="page" style={{ color: "white" }}>Home</div>
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                                <div class="nav-link" style={{ color: "white" }} data-toggle="modal" data-target="#exampleModalCenter">Add_Items</div>
+                            <div class="nav-link" style={{ color: "white" }} data-toggle="modal" data-target="#exampleModalCenter">Add_Items</div>
                         </li>
                         <li class="nav-item">
                             <Link to="/menu" className="link">
@@ -34,13 +30,13 @@ const Navbar = () => {
                         </li>
                     </ul>
                     <form class="d-flex me-4">
-                        { restraunt ?<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {restraunt ? <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                            <Link to="/admin/login" className="link">
-                                <div class="nav-link" style={{ color: "white" }} onClick={handleLogout}>Logout</div>
-                            </Link>
+                                <Link to="/admin/login" className="link">
+                                    <div class="nav-link" style={{ color: "white" }} onClick={handleLogout}>Logout</div>
+                                </Link>
                             </li>
-                        </ul>:<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        </ul> : <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <Link to="/login" className="link">
                                     <div class="nav-link" aria-current="page" style={{ color: "white" }}>Login</div>
@@ -56,27 +52,11 @@ const Navbar = () => {
                 </div>
             </div>
         </nav>
-        
 
-<div class="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+        <div class="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <AddItem/>
+        </div>
     </div>;
 };
 
