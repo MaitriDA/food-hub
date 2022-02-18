@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import '../../components/style.css';
 import axios from "axios";
-import { Link, useHistory } from 'react-router-dom';
+import storage from '../../firebase/config';
 import './style.css';
-import EditItem from './EditItem';
 import Dialog from '@material-ui/core/Dialog';
 
 const FoodCard = ({ data }) => {
-    const user = JSON.parse(localStorage.getItem("user"));
     const [details, setdetails] = useState(data);
     const [open, setOpen] = useState(false);
-    const history = useHistory();
-
+    const [urlCheck,setUrlCheck]=useState(false);
     const handleClose = () => {
         setOpen(false);
     };
     const handleChange = (e) => {
-        if (e.target.name === "veg") {
+        if (e.target.name == "image") {
+            setUrlCheck(true);
+            const file = e.target.files[0];
+            if (file) {
+                const filename = file.name + data._id;
+                console.log(filename)
+                const uploadTask = storage.ref(`item/${filename}`).put(file);
+                uploadTask.on("state_changed", snapshot => { },
+                    error => { console.log(error); },
+                    () => {
+                        storage.ref("item").child(filename).getDownloadURL().then(url => {
+                            console.log(url);
+                            if (url) {
+                                setUrlCheck(false);
+                            }
+                            setdetails({ ...details, [e.target.name]: url });
+                        });
+                    });
+            }
+            else {
+                console.log("Null")
+            }
+        }
+        else if (e.target.name === "veg") {
             if (e.target.id === "yes") {
                 setdetails({ ...details, [e.target.name]: true });
             }
@@ -103,13 +123,13 @@ const FoodCard = ({ data }) => {
                                 <label htmlFor="no" class="ms-2">No</label>
                             </div>
                         </div>
-                        <input type="file" style={{ fontWeight: "500", marginTop: "10px" }} />
+                        <input id="html" style={{ fontWeight: "500",marginTop:"10px" }} type="file" name="image" class="input-field mt-2" autoComplete="off"onChange={handleChange} placeholder="Click to add Description" />
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" style={{ backgroundColor: "white", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "#d35100" }} data-dismiss="modal" onClick={handleClose}>Cancel</button>
-                    <button type="button" style={{ backgroundColor: "#d35100", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "white" }} class="btn btn-primary" onClick={handleEditDialog} data-dismiss="modal">Edit</button>
+                    <button type="button" style={{ backgroundColor: "#d35100", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "white" }} class="btn btn-primary" onClick={handleEditDialog} data-dismiss="modal" disabled={urlCheck}>Edit</button>
                 </div>
             </div>
         </Dialog>

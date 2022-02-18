@@ -69,7 +69,7 @@ const EditItem = ({item}) => {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" style={{ backgroundColor: "white", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "#d35100" }} data-dismiss="modal">Cancel</button>
-                        <button type="button" style={{ backgroundColor: "#d35100", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "white" }} class="btn btn-primary" onClick={handleEdit} data-dismiss="modal">Edit</button>
+                        <button type="button" style={{ backgroundColor: "#d35100", border: "2px solid #d35100", fontSize: "15px", fontWeight: "600", color: "white" }} class="btn btn-primary" onClick={handleEdit} data-dismiss="modal" >Edit</button>
                     </div>
                 </div>
             </div>
