@@ -26,11 +26,11 @@ const Restraunts = () => {
             <div style={{ height: "250px"}}>
               <img src={r.image} style={{ height: "160px", width: "100%", borderRadius: "5px" }} />
               <h5 class="mt-1" style={{color:"black"}}>{r.name}</h5>
-              {r.description?<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}> {`${r.description.substring(0, 30)}...`}</p>:<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}>Yummy Food</p>}
+              {r.description?<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}> {`${r.description.substring(0, 25)}...`}</p>:<p style={{ marginTop: "-10px", fontSize: "15px",color:"gray" }}>Yummy Food</p>}
               <div class="d-flex justify-content-between" style={{ fontWeight: "600", marginTop: "-20px" }}>
                 <div style={{color:"black"}}>
                   <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                  <span class="ms-2">{r.rating}</span>
+                  {r.rating ? <span class="ms-2">{r.rating}</span>:<span class="ms-2">No rating</span>}
                 </div>
                 <div >
                   {r.veg && <span style={{ color: "green" }}>Pure Veg</span>}

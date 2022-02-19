@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const CartSchema=new mongoose.Schema({
+const OrderSchema=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         require:"User",
@@ -16,9 +16,23 @@ const CartSchema=new mongoose.Schema({
     quantity:{
         type:Number
     },
+    status:{
+        type:Number,
+        default:0
+    },
     price:{
         type:Number
+    },
+    paymentMode:{
+        type:Number
+    },
+    paymentStatus:{
+        type:Boolean,
+        default:true
+    },
+    paymentId:{
+        type:String
     }
 },{timestamps:true});
 
-module.exports=mongoose.model("Cart",CartSchema);
+module.exports=mongoose.model("Order",OrderSchema);

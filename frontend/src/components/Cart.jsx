@@ -58,6 +58,14 @@ const Cart = () => {
         const total=await axios.get(`http://localhost:5000/server/cart/${user._id}/total`);
         setCartTotal(total.data);
     }
+
+    const handlePayOnline=()=>{
+        console.log("Pay online")
+    }
+
+    const handleCOD=()=>{
+        console.log("Cash on Delivery");
+    }
     useEffect(()=>{
         getCart();
     },[])
@@ -67,7 +75,7 @@ const Cart = () => {
             <Navbar/>
             <div class="container-fluid" style={{ position: 'absolute', marginTop: "80px" }}>
             <div className="d-flex">
-                <div style={{width:"65%"}}>
+                {cart.length!==0 ?<div style={{width:"65%"}}>
                     {cart.map((i,index)=>(<div class="mx-auto d-flex pt-3" style={{ width: "80%", borderBottom: "1px solid gray" }}>
                         <div class="ms-5 mt-3" style={{ width: "100%" }}>
                             <div class="food-info">
@@ -88,7 +96,7 @@ const Cart = () => {
                             <img class="ms-auto me-3 " src={i.image} style={{ width: "150px", height: "90px", borderRadius: "10px" }} />
                         </div>
                     </div>))}
-                </div>
+                </div>:<div style={{width:"65%",textAlign:"center"}}>Your cart is Empty</div>}
                 <div class="ps-5 pe-5"style={{ width:"30%",backgroundColor: "rgb(241,241,241)" ,height:"fit-content" }}>
                     <h4 class="mx-auto mt-3" style={{width:"fit-content",color:"#d35100"}}>CART TOTAL</h4>
                     <div class="d-flex mt-3" style={{fontSize:"18px"}}>
@@ -112,8 +120,8 @@ const Cart = () => {
                         <p >Total:</p>
                         <span class="ms-auto">Rs {cartTotal.total-cartTotal.discount+cartTotal.delivery+parseInt(cartTotal.total*0.05)}/-</span>
                     </div>
-                    <button className="btn btn-primary mt-3" style={{width:"100%",backgroundColor:"black",border:"none"}}>Pay Online</button>
-                    <button className="btn btn-primary mt-3 mb-5" style={{width:"100%",backgroundColor:"black",border:"none"}}>Cash On Delivery</button>
+                    <button className="btn btn-primary mt-3" style={{width:"100%",backgroundColor:"black",border:"none"}} onClick={handlePayOnline}>Pay Online</button>
+                    <button className="btn btn-primary mt-3 mb-5" style={{width:"100%",backgroundColor:"black",border:"none"}} onClick={handleCOD}>Cash On Delivery</button>
                 </div>
             </div>
         </div>

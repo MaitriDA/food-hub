@@ -45,7 +45,7 @@ const Restraunt = () => {
                   <div class="d-flex" style={{ fontWeight: "600" }}>
                     <div >
                       <i class="fa fa-star" style={{ alignItems: "center" }}></i>
-                      <span class="ms-2">{restraunt.rating}</span>
+                      {restraunt.rating?<span class="ms-2">{restraunt.rating}</span>:<span span class="ms-2">No Rating</span>}
                     </div>
                     <div >
                       {restraunt.veg && <span class="ms-5" style={{ color: "green" }}>Pure Veg</span>}

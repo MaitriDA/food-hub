@@ -42,6 +42,11 @@ const Navbar = () => {
                                 <div class="nav-link" style={{ color: "white" }} onClick={handleLogout}>Logout</div>
                             </li>
                             <li class="nav-item">
+                            <Link to="/order" className="link">
+                                <div class="nav-link" style={{ color: "white" }}>Orders</div>
+                                </Link>
+                            </li>
+                            <li class="nav-item">
                                 <Link to="/cart" className="link">
                                     <div class="nav-link" style={{ color: "white" }}><img src={cart} style={{ height: "25px" }} /></div>
                                 </Link>

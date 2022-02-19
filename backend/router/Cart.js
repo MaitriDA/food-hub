@@ -6,6 +6,7 @@ const Cart = require("../model/Cart.js");
 
 //Add Item
 router.post("/:id", async (req, res) => {
+    console.log(req.body);
     try {
         const newCart = await new Cart(req.body);
         const cart = await newCart.save();
@@ -49,14 +50,22 @@ router.get("/:id/total",async(req,res)=>{
         var resArray=[];
         for(i=0;i<l;i++){
             const item=await Item.findById(cart[i].item);
+            var singleItem=0;
+            var tax=0;
             var price=cart[i].quantity*item.price;
+            singleItem=(singleItem+price);
+            tax=singleItem*0.05;
             total=total+price;
             const restraunt =await Restraunt.findById(cart[i].restraunt);
+            singleItem=singleItem-(singleItem*0.01*(restraunt.offer));
             var discount=discount+price*0.01*(restraunt.offer);
             if(!resArray.includes(cart[i].restraunt.toString())){
                 delivery=delivery+restraunt.delivery;
                 resArray.push(cart[i].restraunt.toString());
             }
+            const cartItem = await Cart.findOneAndUpdate({ "user": req.params.id, "item": cart[i].item }, {
+                $set: { price: singleItem+tax}
+            });
         }
         const cartTotal={
             total:total,

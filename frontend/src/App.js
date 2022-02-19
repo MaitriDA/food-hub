@@ -11,6 +11,7 @@ import UserRegister from "./components/Auth/UserRegister";
 import AdminLogin from "./components/Auth/AdminLogin";
 import AdminRegister from "./components/Auth/AdminRegister";
 import Admin from "./components/Admin/Admin";
+import Order from "./components/Order";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/res"><Restraunts/></Route>
           <Route exact path="/menu"><Menu/></Route>
           <Route exact path="/cart"><Cart/></Route>
+          <Route exact path="/order"><Order/></Route>
 
           <Route exact path="/login"><UserLogin/></Route>
           <Route exact path="/register"><UserRegister/></Route>
