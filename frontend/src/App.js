@@ -12,6 +12,7 @@ import AdminLogin from "./components/Auth/AdminLogin";
 import AdminRegister from "./components/Auth/AdminRegister";
 import Admin from "./components/Admin/Admin";
 import Order from "./components/Order";
+import AdminOrder from "./components/Admin/AdminOrder";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route exact path="/admin"><Admin/></Route>
           <Route exact path="/admin/login"><AdminLogin/></Route>
           <Route exact path="/admin/register"><AdminRegister/></Route>
+          <Route exact path="/admin/orders"><AdminOrder/></Route>
+
         </Switch>
       </Router>
     </div>

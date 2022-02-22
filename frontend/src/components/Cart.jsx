@@ -59,12 +59,14 @@ const Cart = () => {
         setCartTotal(total.data);
     }
 
-    const handlePayOnline=()=>{
-        console.log("Pay online")
+    const handlePayOnline=async()=>{
+        const res=await axios.post(`http://localhost:5000/server/order/${user._id}/order`,{paymentMode:1,paymentStatus:true});
+        console.log(res.data);
     }
 
-    const handleCOD=()=>{
-        console.log("Cash on Delivery");
+    const handleCOD=async()=>{
+        const res=await axios.post(`http://localhost:5000/server/order/${user._id}/order`,{paymentMode:0,paymentStatus:false});
+        console.log(res.data);
     }
     useEffect(()=>{
         getCart();

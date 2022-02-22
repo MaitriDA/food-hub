@@ -96,7 +96,7 @@ router.get("/:id/cart", async (req, res) => {
                     veg:item.veg,
                     id:cart[i].item,
                     image:item.image,
-                    restraunt:item.restraunt
+                    restraunt:item.restraunt,
                 }
                 itemArray.push(itemObj);
                 

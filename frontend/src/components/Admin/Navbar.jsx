@@ -24,7 +24,7 @@ const Navbar = () => {
                             <div class="nav-link" style={{ color: "white" }} data-toggle="modal" data-target="#exampleModalCenter">Add_Items</div>
                         </li>
                         <li class="nav-item">
-                            <Link to="/menu" className="link">
+                            <Link to="/admin/orders" className="link">
                                 <div class="nav-link" style={{ color: "white" }}>Orders</div>
                             </Link>
                         </li>

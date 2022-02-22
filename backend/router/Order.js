@@ -44,4 +44,40 @@ router.post("/:id/order", async (req, res) => {
     }
 })
 
+//Get Orders
+router.get("/:id",async(req,res)=>{
+    try{
+        const orders=await Order.find({"user":req.params.id});
+        var itemArray=[];
+        var l=orders.length;
+        for(i=0;i<l;i++){
+            try{
+                const item=await Item.findById(orders[i].item);
+                const restraunt=await Restraunt.findById(orders[i].restraunt);
+                const itemObj={
+                    _id:orders[i]._id,
+                    name:item.name,
+                    price:item.price,
+                    quantity:orders[i].quantity,
+                    veg:item.veg,
+                    id:orders[i].item,
+                    image:item.image,
+                    restraunt:restraunt.name,
+                    paymentMode:orders[i].paymentMode,
+                    paymentStatus:orders[i].paymentStatus,
+                    status:orders[i].status,
+                    createdAt:orders[i].createdAt
+                }
+                itemArray.push(itemObj);   
+            }catch(err){
+                console.log(err);
+                res.status(500).json(err);
+            }
+        }
+        res.status(200).json(itemArray);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Error"});
+    }
+})
 module.exports = router;
