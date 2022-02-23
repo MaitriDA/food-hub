@@ -30,11 +30,11 @@ const Navbar = () => {
                                 <div class="nav-link" style={{ color: "white" }}>Restraunts</div>
                             </Link>
                         </li>
-                        <li class="nav-item">
+                        {/* <li class="nav-item">
                             <Link to="/menu" className="link">
                                 <div class="nav-link" style={{ color: "white" }}>Menu</div>
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
                     <form class="d-flex me-4">
                         { user ?<ul class="navbar-nav me-auto mb-2 mb-lg-0">

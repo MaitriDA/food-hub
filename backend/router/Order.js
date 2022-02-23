@@ -7,6 +7,7 @@ const Order = require("../model/Orders.js");
 
 //Add Order
 router.post("/:id/order", async (req, res) => {
+    console.log(req.body);
     try {
         const cart = await Cart.find({ "user": req.params.id });
         var l = cart.length;
@@ -20,6 +21,9 @@ router.post("/:id/order", async (req, res) => {
                     quantity: cart[i].quantity,
                     status: 0,
                     price: cart[i].price,
+                    address1:req.body.address1,
+                    address2:req.body.address2,
+                    contact:req.body.contact,
                     paymentMode: req.body.paymentMode,
                     paymentStatus: req.body.paymentStatus
                 }
@@ -75,6 +79,63 @@ router.get("/:id",async(req,res)=>{
             }
         }
         res.status(200).json(itemArray);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Error"});
+    }
+})
+
+//Get Order Admin
+router.get("/admin/:id",async(req,res)=>{
+    console.log(req.params.id);
+    try{
+        const orders=await Order.find({"restraunt":req.params.id});
+        var itemArray=[];
+        var l=orders.length;
+        for(i=0;i<l;i++){
+            try{
+                const item=await Item.findById(orders[i].item);
+                const user=await User.findById(orders[i].user);
+                const itemObj={
+                    _id:orders[i]._id,
+                    name:item.name,
+                    price:item.price,
+                    quantity:orders[i].quantity,
+                    address1:orders[i].address1,
+                    address2:orders[i].address2,
+                    contact:orders[i].contact,
+                    veg:item.veg,
+                    id:orders[i].item,
+                    image:item.image,
+                    user:user.name,
+                    paymentMode:orders[i].paymentMode,
+                    paymentStatus:orders[i].paymentStatus,
+                    status:orders[i].status,
+                    createdAt:orders[i].createdAt
+                }
+                itemArray.push(itemObj);   
+            }catch(err){
+                console.log(err);
+                res.status(500).json(err);
+            }
+        }
+        res.status(200).json(itemArray);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({message:"Error"});
+    }
+})
+
+//Update Order
+router.put("/:id/admin",async(req,res)=>{
+    try{
+        const orderFind=await Order.findById(req.params.id);
+        if(orderFind){
+            const order=await Order.findByIdAndUpdate(req.params.id,{
+                $set:req.body
+            })
+            res.status(200).json({message:"Order Updated"});
+        }
     }catch(err){
         console.log(err);
         res.status(500).json({message:"Error"});

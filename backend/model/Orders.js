@@ -5,6 +5,18 @@ const OrderSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         require:"User",
     },
+    address1:{
+        type:String,
+        default:""
+    },
+    address2:{
+        type:String,
+        default:""
+    },
+    contact:{
+        type:Number,
+        default:""
+    },
     restraunt:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Restraunt",

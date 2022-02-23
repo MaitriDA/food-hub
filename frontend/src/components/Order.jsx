@@ -10,16 +10,35 @@ import delivered from '../img/delivered.png';
 const Order = () => {
     const [order, setOrder] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
+
     const getOrder = async () => {
         const res = await axios.get(`http://localhost:5000/server/order/${user._id}`);
-        setOrder(res.data);
+        var temp=res.data;
+        temp.sort(function(a,b){
+            var dateA = new Date(a.createdAt), dateB = new Date(b.createdAt);
+            return dateB - dateA
+        })
+        const l=temp.length;
+        var i;
+        for(i=0;i<l;i++){
+            var tempDemo=res.data[i];
+            var date=new Date(tempDemo.createdAt);
+            const day=date.getDate();
+            const month=date.getMonth()+1;
+            const year=date.getYear()-100;
+            const dateStr=day+" / "+month+" / "+year;
+            const time=date.getHours()+":"+date.getMinutes();
+            tempDemo.createdAt=dateStr+", "+time;
+            temp[i]=tempDemo;
+        }
+        setOrder(temp);
     }
 
     useEffect(() => {
         getOrder();
     }, [])
 
-    console.log(order)
+    
     return (
         <div>
         <div>
@@ -54,8 +73,7 @@ const Order = () => {
                                 <img src={i.image} style={{ width: "120px", height: "80px", borderRadius: "5px" }} />
                                 <div style={{ width: "30%" }}>
                                     <div class="d-flex align-items-center" >
-                                        <div style={{ fontSize: "18px", fontWeight: "500" }}>16/09/2021, </div>
-                                        <div style={{ marginLeft: "10px" }}>21:05 PM</div>
+                                        <div >{i.createdAt} </div>
                                     </div>
                                     <div style={{ fontSize: "12px" }}>Order Id:  {i._id}</div>
                                     <div style={{ marginTop: "5px", fontSize: "15px", color: "gray" }}>
@@ -70,7 +88,7 @@ const Order = () => {
                                
                                 <div style={{ width: "30%", fontSize: "15px"}}>
                                     <div>
-                                        <span style={{ fontWeight: "500" }}> Rs. {i.price} /-</span>
+                                        <span style={{ fontWeight: "500" }}> Rs. {i.price*i.quantity} /-</span>
                                         <span style={{ fontSize: "12px" }}> (Delivery Excluded)</span>
                                     </div>
                                     {i.paymentMode===1?<div>Online Pay</div>:<div>Cash On Delivery</div>}
