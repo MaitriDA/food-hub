@@ -18,9 +18,8 @@ A MERN stack food ordering website created with user side and admin dashboard.
 https://github.com/MaitriDA/food-hub
 
 ## Screenshots
-
 1) Landing Page
-![image](https://drive.google.com/uc?export=view&id=1ScIxH3kO_YXINIOJTTila8CMjwRptKtE)
+![image](https://drive.google.com/uc?export=view&id=15r2XEWulLWcGXvkxmnjsJG19GWgREf33)
 
 2) Restrauts Page
 ![image](https://drive.google.com/uc?export=view&id=1RpfEJa36SRSAXBA_HZBgVSHzBambu60o)
