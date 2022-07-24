@@ -1,10 +1,5 @@
 # Food Hub
 A MERN stack food ordering website created with user side and admin dashboard.
-where restaurant owners
-can create profile, add, delete and update food items along with online payment feature supported by Rozarpay
-• Users can search items based on location, restaurant, food item and can get the delivery status of the order.
-• Tech Stack: ReactJS, NodeJS, ExpressJS, Bootstrap, MongoDB, Firebase
-
 
 ## Feature 
 1) Users can search items based on location, restaurant, food item
@@ -20,28 +15,28 @@ can create profile, add, delete and update food items along with online payment 
 | Database | MongoDB, Firebase |
 
 ## Github Repositories
-https://github.com/MaitriDA/blog-website
+https://github.com/MaitriDA/food-hub
 
 ## Screenshots
 
-1) Login Page
-![image](https://drive.google.com/uc?export=view&id=16YO-wj4mQqpH_TnrCVVfxmbkN2q-iJ0_)
+1) Landing Page
+![image](https://drive.google.com/uc?export=view&id=1ScIxH3kO_YXINIOJTTila8CMjwRptKtE)
 
-2) Register Page
+2) Restrauts Page
 ![image](https://drive.google.com/uc?export=view&id=1RpfEJa36SRSAXBA_HZBgVSHzBambu60o)
 
-3) Home Page
+3) Restraunt Page
 ![image](https://drive.google.com/uc?export=view&id=11zZQT05yzBR5LCczeprM7Je1e75BNJwx)
 ![image](https://drive.google.com/uc?export=view&id=1rGmogqS11n65zciWH3d-fvupZz6tkHqI)
 
-4) Filter by category
+4) My Orders Page
 ![image](https://drive.google.com/uc?export=view&id=17pRYvqak6DZTVMNQCZbDKUKcJJdnimf7)
 ![image](https://drive.google.com/uc?export=view&id=1zCFz-WASfs2lwG2yu5xD_-6HG-_iQY2J)
 
-5) Filter acc. to user
+5) Cart
 ![image](https://drive.google.com/uc?export=view&id=1u8LF2xjScKMyoiLV1Gwi1N6Ohg2tFyYY)
 
-6) Detailed Blog
+6) Admin Dashboard
 ![image](https://drive.google.com/uc?export=view&id=189S_uEhmMfq7IMtOp5QBHEDajFu7KkMo)
 
 7) Write Blog
