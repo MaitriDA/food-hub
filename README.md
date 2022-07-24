@@ -29,17 +29,27 @@ https://github.com/MaitriDA/food-hub
 ### 2) Restrauts Page
 ![image](https://drive.google.com/uc?export=view&id=1jzjFgH-oFMMw21us7GKtXR1D9Vg53Rq8)
 
+<br/>
+
 ### 3) Restraunt Page
 ![image](https://drive.google.com/uc?export=view&id=1KUAlYEg9feKVC2VciFcn02KSHJZ60Arb)
+
+<br/>
 
 ### 4) My Orders Page
 ![image](https://drive.google.com/uc?export=view&id=1RnCG5xctWT4fLTXlB99cTqrOG_ippjwc)
 
+<br/>
+
 ### 5) Cart
 ![image](https://drive.google.com/uc?export=view&id=1ueQejK0NU3CpCBfhmP3cIjlA3QMRE-7c)
 
+<br/>
+
 ### 6) Admin Dashboard - Add, Update, Delete Food Items
 ![image](https://drive.google.com/uc?export=view&id=1gn3uufi93doghEDY_n7U-nZJDPrSYEOm)
+
+<br/>
 
 ### 7) Admin Dashboard - Orders
 ![image](https://drive.google.com/uc?export=view&id=1w_nKw8N7TWuGWkQLgnXU5jik4a8zTire)
