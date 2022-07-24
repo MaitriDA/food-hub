@@ -20,6 +20,9 @@ https://github.com/MaitriDA/food-hub
 ## Screenshots
 1) Landing Page
 ![image](https://drive.google.com/uc?export=view&id=15r2XEWulLWcGXvkxmnjsJG19GWgREf33)
+![image](https://drive.google.com/uc?export=view&id=19XwPHMzTKChqXWi4RnoZjecVt-B4rIj6)
+![image](https://drive.google.com/uc?export=view&id=1NcP8nErSrHnBMxFj1B3aHcD9DTlXNkk2)
+![image](https://drive.google.com/uc?export=view&id=1mkbc1tBoJnYS5QYuocQuE6ZiQQxwhBwN)
 
 2) Restrauts Page
 ![image](https://drive.google.com/uc?export=view&id=1RpfEJa36SRSAXBA_HZBgVSHzBambu60o)
