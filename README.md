@@ -25,24 +25,19 @@ https://github.com/MaitriDA/food-hub
 ![image](https://drive.google.com/uc?export=view&id=1mkbc1tBoJnYS5QYuocQuE6ZiQQxwhBwN)
 
 2) Restrauts Page
-![image](https://drive.google.com/uc?export=view&id=1RpfEJa36SRSAXBA_HZBgVSHzBambu60o)
+![image](https://drive.google.com/uc?export=view&id=1jzjFgH-oFMMw21us7GKtXR1D9Vg53Rq8)
 
 3) Restraunt Page
-![image](https://drive.google.com/uc?export=view&id=11zZQT05yzBR5LCczeprM7Je1e75BNJwx)
-![image](https://drive.google.com/uc?export=view&id=1rGmogqS11n65zciWH3d-fvupZz6tkHqI)
+![image](https://drive.google.com/uc?export=view&id=1KUAlYEg9feKVC2VciFcn02KSHJZ60Arb)
 
 4) My Orders Page
-![image](https://drive.google.com/uc?export=view&id=17pRYvqak6DZTVMNQCZbDKUKcJJdnimf7)
-![image](https://drive.google.com/uc?export=view&id=1zCFz-WASfs2lwG2yu5xD_-6HG-_iQY2J)
+![image](https://drive.google.com/uc?export=view&id=1RnCG5xctWT4fLTXlB99cTqrOG_ippjwc)
 
 5) Cart
-![image](https://drive.google.com/uc?export=view&id=1u8LF2xjScKMyoiLV1Gwi1N6Ohg2tFyYY)
+![image](https://drive.google.com/uc?export=view&id=1ueQejK0NU3CpCBfhmP3cIjlA3QMRE-7c)
 
-6) Admin Dashboard
-![image](https://drive.google.com/uc?export=view&id=189S_uEhmMfq7IMtOp5QBHEDajFu7KkMo)
+6) Admin Dashboard - Add, Update, Delete Food Items
+![image](https://drive.google.com/uc?export=view&id=1gn3uufi93doghEDY_n7U-nZJDPrSYEOm)
 
-7) Write Blog
-![image](https://drive.google.com/uc?export=view&id=1rcK17E5hGr9jzHnAN0JCi8BmEW0z1Tlp)
-
-8) Profile
-![image](https://drive.google.com/uc?export=view&id=1qUt_6uNL23ck57ir3m_CNMINzUC9QLmx)
+7) Admin Dashboard - Orders
+![image](https://drive.google.com/uc?export=view&id=1w_nKw8N7TWuGWkQLgnXU5jik4a8zTire)
